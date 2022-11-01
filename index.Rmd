@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "A Visual Study of the 2022 Poster Movement of Chinese Diaspora"
+author: "Siyu Yang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---

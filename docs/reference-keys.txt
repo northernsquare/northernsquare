@@ -1,7 +1,12 @@
 introduction
 proposal
 research-topic
-data-availability
+data-collection
+data-avaliability
+data-collection-methods
+scraping-ethics-and-safety-considerations
+safety
+consent
 data
 sources
 cleaning-transformation

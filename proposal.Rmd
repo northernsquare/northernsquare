@@ -27,7 +27,7 @@ Due to the distributed nature of the dataset, I will be using two methods for da
 As described in the visualization below, the parser will be collecting data from the two Instagram pages, as well as myduty.net, and the Google Form will be collecting data from Telegram channels. Data will be stored in a Google Drive, which is loaded into AirTable for tagging and cleaning.
 
 ```{r}
-knitr::include_graphics("visual1.png")
+knitr::include_graphics("image/visual1.png")
 ```
 
 #### Data Points to be Collected
@@ -37,7 +37,7 @@ knitr::include_graphics("visual1.png")
 - Basic demographics of participants (only for survey submissions)
 
 ```{r}
-knitr::include_graphics("visual2.png")
+knitr::include_graphics("image/visual2.png")
 ```
 
 ### Scraping Ethics and Safety Considerations 

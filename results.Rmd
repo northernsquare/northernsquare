@@ -1,1 +1,155 @@
 # Results
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(tools)
+library(forcats)
+library(grid)
+
+theme_set(theme_minimal())
+
+```
+
+```{r}
+data <- read.csv("data/data_cleaned.csv", header=TRUE, stringsAsFactors=FALSE)
+
+library(redav)
+
+print(max(data$X))
+(nrow(data) - colSums(is.na(data))) / nrow(data) %>%
+  sort(decreasing = TRUE)
+```
+
+
+## Language Used
+```{r}
+
+df_language <- data %>%
+  select(c('Chinese','English', 'Italian', 'Traditional.Chinese', 'french', 'german', 'japanese','korean','spanish')) %>%
+  apply(2, as.logical) %>%
+  data.frame() %>%
+  summarise(across(everything(), sum)) %>%
+  pivot_longer(cols = everything()) 
+
+df_language$name = tolower(df_language$name)
+
+ggplot(df_language, aes(x = fct_reorder(name, value, .desc = TRUE), y = value)) +
+  geom_col(position = "dodge",  show.legend = FALSE, fill = 'cornflowerblue') + 
+  theme(axis.text.x = element_text(angle = 45, hjust=1)) +
+  xlab('language used') + 
+  ylab('count of posters') 
+```
+
+## Message
+```{r}
+df_message <- data %>%
+  select(c('Sitong.Bridge','Xi.Jinping', 'Raise.Awareness', 'Ugyhur.or.Hong.Kong', 'Women.s.rights.or.Queer.Rights', 'Iran.or.Ukraine')) %>%
+  apply(2, as.logical) %>%
+  data.frame() %>%
+  mutate_all(funs(ifelse(is.na(.), 0, .))) %>%
+  summarise(across(everything(), sum)) %>%
+  pivot_longer(cols = everything()) 
+
+df_message$name = tolower(df_message$name)
+
+ggplot(df_message, aes(x = fct_reorder(name, value, .desc = TRUE), y = value)) +
+  geom_col(position = "dodge", fill = 'goldenrod2') + 
+  theme(axis.text.x = element_text(angle = 45, hjust=1)) +
+  xlab('message expressed') + 
+  ylab('count of posters')
+
+```
+
+## Form of expression
+
+```{r}
+df_form <- data %>%
+  select(c('chalk','graffiti', 'hand.written.message', 'letter', 'poster', 'photography','sticker')) %>%
+  apply(2, as.logical) %>%
+  data.frame() %>%
+  summarise(across(everything(), sum)) %>%
+  pivot_longer(cols = everything()) 
+
+df_form$name = tolower(df_form$name)
+
+ggplot(df_form, aes(x = fct_reorder(name, value, .desc = TRUE), y = value)) +
+  geom_col(position = "dodge", fill = 'darkseagreen2') + 
+  theme(axis.text.x = element_text(angle = 45, hjust=1)) +
+  xlab('form of expression') + 
+  ylab('count of posters')
+
+```
+```{r}
+df_time <- data  %>%
+    mutate(date = as.Date(timestamp)) %>% 
+    mutate(Xi.Jinping = replace_na(as.numeric(replace(Xi.Jinping, Xi.Jinping =="True", 1)),0))  %>%
+   group_by(date) %>% 
+   summarize(all_poster = n(), xi = sum(Xi.Jinping)) %>%
+  pivot_longer(cols = -c(date), names_to = 'type', values_to = 'freq') 
+  
+ggplot(df_time, aes(date, freq, group = type, color = type)) +
+  geom_line() +
+  geom_vline(xintercept = as.Date('2022-10-13'), colour = 'darkorange', linetype = 'dotted') +
+  geom_text(aes(x=as.Date('2022-10-12'), label="\nSitong Bridge Protest", y=54), colour="darkorange", angle = 90,  size=3) +
+
+  geom_vline(xintercept = as.Date('2022-10-25'), colour = 'darkorange', linetype = 'dotted') +
+  geom_text(aes(x=as.Date('2022-10-24'), label="\nNational Party Congress", y=53), colour="darkorange", angle = 90,  size=3) +
+
+  geom_vline(xintercept = as.Date('2022-10-29'), colour = 'darkorange', linetype = 'dotted') +
+  geom_text(aes(x=as.Date('2022-10-28'), label="\nProtest in London", y=56), colour="darkorange", angle = 90,  size=3) +
+  
+    geom_vline(xintercept = as.Date('2022-10-31'), colour = 'darkorange', linetype = 'dotted') +
+  geom_text(aes(x=as.Date('2022-10-30'), label="\nProtest in New York", y=55), colour="darkorange", angle = 90,  size=3) +
+    
+  ggtitle("Number of Posters by date") +  labs (x = "", y = "count of posters") +
+  theme(legend.title = element_blank())
+
+
+# oct 13 - sitong bridge protest
+# oct 25 - outcome of second party congress
+```
+```{r}
+df_time <- data  %>%
+    mutate(day_of_week = weekdays(as.Date(timestamp))) %>% 
+    mutate(day_of_week = factor(day_of_week, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))) %>%
+    group_by(day_of_week, University) %>% 
+    summarize(Freq = n()) %>%
+    mutate(University = replace_na(University,FALSE))
+
+ggplot(df_time, mapping = aes(x = day_of_week, y = Freq, fill = University)) +
+  geom_col() +
+  ggtitle("Number of Posters by date") +  
+  labs (x = "", y = "count of posters by day of the week")
+
+```
+```{r}
+df_country = data %>% 
+    group_by(country)  %>% 
+    summarize(Freq = n()) %>% 
+     filter(country != "")
+
+
+ggplot(df_country, mapping = aes(x = Freq, y = fct_reorder(country, Freq, .desc = FALSE))) +
+  geom_point() +
+  ggtitle("Number of Posters by Country") +  
+  labs (x = "", y = "count of posters") +
+  theme_linedraw()
+
+```
+
+```{r}
+df_language_mosaic <- data %>%
+     select(c('gender','Sitong.Bridge','Xi.Jinping', 'Raise.Awareness', 'Ugyhur.or.Hong.Kong', 'Women.s.rights.or.Queer.Rights', 'Iran.or.Ukraine')) %>%
+     mutate(across(c('Sitong.Bridge','Xi.Jinping', 'Raise.Awareness', 'Ugyhur.or.Hong.Kong', 'Women.s.rights.or.Queer.Rights', 'Iran.or.Ukraine'), as.logical)) %>%
+  mutate_all(funs(ifelse(is.na(.), 0, .))) %>%
+     group_by(gender) %>%
+     summarise(across(c('Sitong.Bridge','Xi.Jinping', 'Raise.Awareness', 'Ugyhur.or.Hong.Kong', 'Women.s.rights.or.Queer.Rights', 'Iran.or.Ukraine'), sum)) %>%
+  pivot_longer(cols = c('Sitong.Bridge','Xi.Jinping', 'Raise.Awareness', 'Ugyhur.or.Hong.Kong', 'Women.s.rights.or.Queer.Rights', 'Iran.or.Ukraine'), values_to = 'Freq')
+
+vcd::mosaic(name ~ gender,
+            labeling = vcd::labeling_border(rot_labels = c(45, -45, 0, 0)),
+            df_language_mosaic, direction = c("v", "h"))
+ 
+```

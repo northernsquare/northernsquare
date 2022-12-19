@@ -1,13 +1,5 @@
 # Proposal
 
-## Research topic
-On Oct. 13, days before China's 20th Communist Party Congress, a protester unfurled two banners on a highway overpass in central Beijing denouncing Xi Jinping as a “despotic traitor.” The action inspired a young generation of Chinese diaspora to express their anger by putting up anti-Xi and anti-dictatorship posters. The action is remarkable since for those who grow up under authoritarian rule, expressing dissents in online space might not be new, but extending their expression into the physical space around them requires overcoming intense paranoia, self-censorship, and indoctrination. 
-
-For this project, I hope to explore the poster movement by visualizing images of poster sightings, and attempt to study the below considerations -
-- What are the messages on the poster? Are they only expressing discontent on China's zero-COVID policy, or going as far as calling for a regime change?
-- What does the geologic spread tell us about the movement? Many observers and reporters already picked up that the poster movement is led by young Chinese overseas students - are some regions over or under represented than others? 
-- How did the movement react to the 20th Communist Party Congress news cycle? Does the data align with the observation that there is a spike in action after Xi declared a third term?
-
 ## Data Collection
 
 The poster movement, as many recent grassroots movements under authoritarian regimes, are organized under the decentralization doctrine, dubbed by Hong Kong protesters as "无大台" -- "No central stage". Without central organizers or leading platforms, information are passed through a collection of often anonymous nodes, each node serving very specific purpose, causing data to be relatively scattered and posing a challenge to the data collection process. 

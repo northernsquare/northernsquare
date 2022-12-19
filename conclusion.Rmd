@@ -1,2 +1,39 @@
 # Conclusion
 
+Although the 692 posters we analytized barely captured the scale of the movement, we can observe the following traits:
+
+- Participants are spread across the world;
+- Most submitters identify as women;
+- Most posters appeared on University campuses;
+- The movement mobilizes quickly and is very reactive to the news cycle;
+- A significant portion of the participants directly calls on Xi Jinping.
+
+## Why this project?
+One aspect of living in a totalitarian state is that your memory gets re-written. The Tiananmen massacre never happened; China never denied the existence of COVID early 2020 and never prosecuted doctors; protesters and dissents get forgotten as they "disappear". What broke my heart when I saw the lone protester on Beijing's Sitong bridge was that he was alone. What happened after completed upended what I expect of my generation, breaking out of fear and political apathy to take over the torch and making an effort to make sure that the Sitong bridge message is heard.
+
+Curating this dataset documenting this movement is my contribution to the movement. The Internet is supposed to remember, but the Internet under censorship is forced to forget over and over again. Posting on social media is a job not finished; in order to write this movement into history, we need to document it in a way that could be useful to reporters and researchers. To quote the late great Aaron Swartz (also fitting as we are using markdown, which he created in 2004): 
+
+>Transparency can be a powerful thing, but not in isolation. So, let’s stop passing the buck by saying our job is just to get the data out there and it’s other people’s job to figure out how to use it. Let’s decide that our job is to fight for good in the world. I’d love to see all these amazing resources go to work on that.
+
+As the "other people" whose job is to "figure out how to use it", I found the most challenging aspect of this research project is to set up a smooth data collection -> tagging -> output -> analysis pipeline that allows for automatic syncs and routine tagging, which I was able to eventually achieve by the pipeline architecture in section 3.3. The second hardest part is to go through the tagging process of hundreds of images, most of them repeating the same mantra; at times it feels almost like a prayer.
+ 
+## What comes next?
+
+I decided to put a hard stop on the data cleaning process in Mid-November, as submission gradually dies down. November 25, an apartment fire in Urumqi sparked national outrage, and Chinese people around the world took the streets in a scale unseen since 1989. Due to the time limit of this project, I was unable to track this most recent uptick where the words on the poster peeled off the wall and are chanted in massive rallies. I have started the work of scraping protest data both in and out of China, and would love to continue to track the turn of events.
+
+If anything, this project shows the value of continuing to track this dataset. I hope to eventually create an interactive map in D3 that allows the following functions:
+
+- Shows the geographic spread of the posters;
+- Shows how they pop up over time
+- Being able to filter the map by messages, languages and other features;
+- Double click on the posters to read the message.
+
+
+```{r, fig.cap="Airtable data tagging interface. File Path blocked since it includes the Gmail user name of the submitter"}
+knitr::include_graphics("image/visual8.jpg")
+```
+
+
+
+
+

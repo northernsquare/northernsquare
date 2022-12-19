@@ -1,6 +1,6 @@
 # Data 
 ## Goal
-There are a lot of efforts to collect and share information about the movement, but almost all of them are trapped in social media applications like Twitter feeds or Instagram stories. Social media are easy to share and to gauge momentum during a political movement, but are not in a usable format for visualization and research.
+Many efforts popped up to collect and share information about the movement -- including `myduty.net` and many instagram and Twitter accounts. But most are designed for easy to share and to gauge momentum during a political movement, but are not in a usable format for visualization and research.
 
 I hope to create a data collection and data cleaning workflow that achieves the following goals -
 
@@ -8,7 +8,7 @@ I hope to create a data collection and data cleaning workflow that achieves the 
 
   - A unique ID should be created to link the image file to other features;
   - Manually entered fields (e.g. locations) should be standardized;
-  - Features created (e.g. what the poster is about) should be easily queryable.
+  - Features created (e.g. what the poster is about) should be easily queryable, in boolean or categorical fields.
   
 2) Create a reproducible workflow that allows me to continuously scrape, clean and maintain this dataset.
 
@@ -20,9 +20,9 @@ knitr::include_graphics("image/visual3.png")
 
 ## Data Collection
 ### Instagram pages
-The phenomenon of overseas Chinese protestors using Instagram to distribute information and organize protests is well documented in mainstream media ([Wired](Instagram accounts that have been considered central information hubs for the protest) and [NYTimes](https://www.nytimes.com/2022/10/24/business/xi-jinping-protests.html)). Most notably, [@northern_square](https://www.instagram.com/northern_square/) and [@citizendailycn](https://www.instagram.com/citizensdailycn/?hl=en) can be pinpointed as the central hub of information. In an interview with Wired, Bei, a New York based artist who manages [@northern_square](https://www.instagram.com/northern_square/) described that his followers would put up the same slogan in their cities in solidarity with the Sitong Bridge protester, and then submitting the pictures to Bei. During the height of the movement, he would receive hundreds of submissions a day.
+The phenomenon of overseas Chinese protestors using Instagram to distribute information and organize protests is well documented in mainstream media ([Wired](Instagram accounts that have been considered central information hubs for the protest) and [NYTimes](https://www.nytimes.com/2022/10/24/business/xi-jinping-protests.html)). Most notably, [@northern_square](https://www.instagram.com/northern_square/) and [@citizendailycn](https://www.instagram.com/citizensdailycn/?hl=en) can be pinpointed as the central hub of information. In an interview with Wired, Bei, a New York based artist who manages [@northern_square](https://www.instagram.com/northern_square/) described that his followers would print out the poster templates that are shared on social media, put up the same slogan in their cities in solidarity with the Sitong Bridge protester, and then submitting the pictures to Bei, who will then share the picture on his Instagram story. During the height of the movement, he would receive hundreds of submissions a day, and his Instagram story would look like an endless stream of posters.
 
-To collect information shared by those two accounts, I first convert their Instagram pages into `JSON` format by adding the query string `?__a=1&__d=dis` to their Instagram profile's `HTML` address. Then the `JSON` can be downloaded to a local file, which I parsed using `scripts/instagram_scraper.py`. The output of the scraper is a `.csv` file containing metadata information of the images scraped, as well as the image files, connected by a unique `filename` field.
+To collect information shared by those two accounts, I first convert their Instagram pages into `JSON` format by adding the query string `?__a=1&__d=dis` to their Instagram profile's `HTML` address. Then the `JSON` can be downloaded to a local file, which I parsed using `scripts/instagram_scraper.py` into tabular format. The output of the scraper is a `.csv` file containing metadata information of the images scraped, as well as the image files, connected by a unique `filename` field.
 
 The results scraped from the Instagram pages only includes the image themselves and the post caption, and does not include any information with regard to who submitted the image or where the picture was taken. However, due to the curated nature of the post, this dataset includes some of the most compelling graphics -
 
@@ -31,12 +31,14 @@ knitr::include_graphics("image/visual5.png")
 ```
 
 ### Community Maintained Website
-[myduty.net](myduty.net) is a spin off of [@citizendailycn](https://www.instagram.com/citizensdailycn/?hl=en), built and maintained by community members, which collects and displays poster sightings from anonymous submissions. I built a simple scraper `scripts/website_scraper.py` using python's `BeautifulSoup` package. The output of the scraper is a `.csv` file containing metadata information of the images scraped, as well as the image files, connected by a unique `filename` field.
+[myduty.net](myduty.net) is a spin off of [@citizendailycn](https://www.instagram.com/citizensdailycn/?hl=en), built and maintained by community members, which collects and displays poster sightings from anonymous submissions. I built a simple scraper `scripts/website_scraper.py` using python's `BeautifulSoup` package. The output of the scraper is a `.csv` file containing metadata information of the images scraped as a tabular format, as well as the image files, connected by a unique `filename` field.
 
 The results scrapped from the website does not include information about the submitter, but does include the location of the poster. 
 
-### Goolge Form
-A Google form is distributed to followers of [@northern_square](https://www.instagram.com/northern_square/) to submit sightings of poster or their own posters, which collects both pictures of the poster and a brief survey on submitter demographics. The form is also distributed in protesters' Telegram groups, which is then passed through `scripts/form_data_cleaner.py` for basic data cleaning.
+### Survey
+A [survey](https://forms.gle/qTX1Gcv4DTtnapjH8) is distributed to followers of [@northern_square](https://www.instagram.com/northern_square/) to submit sightings of poster or their own posters. The survey collects both pictures of the poster and a brief survey on submitter demographics. The form is also distributed in protesters' Telegram groups. 
+
+The result of the survey is then passed through `scripts/form_data_cleaner.py` to wrangle into tabular format. 
 
 ```{r, fig.cap = "@northern_square calling for followers to submit their posters through Google form"}
 knitr::include_graphics("image/visual4.png")
@@ -47,15 +49,15 @@ knitr::include_graphics("image/visual4.png")
 
 By the end of November, I have collected 734 image files from the Google form, 360 image files scraped from `myduty.net`, and 151 scraped from both Instagram accounts. There are a lot of data quality issues associated with the data set:
 
-- Location data are entered by the submitter, thus requires manual cleaning before we can use `Geopy` to standardize;
-- Google automatically pulls the username of the form submitter to name the file they uploaded; 
-- Duplicate submissions exist;
+- Location data are entered by the submitter, thus requires manual cleaning before we can use geocoder to standardize;
+- Google automatically pulls the username of the form submitter to name the file they uploaded, causing a privacy risk; 
+- Duplicate submissions exist between the three channels;
 - Some submissions or scrapped content are not pictures of posters (e.g. other Instagram posts, spams, etc);
 - Image data requires manual tagging to extract queryable information;
 - Image data contains EXIF data, which includes camera information and occasionally detailed GPS location of where the picture was taken;
 - Some submissions include personally identifiable information.
 
-To account for the above issues, I loaded the images and metadata files into Airtable to leverage its interactive format for data tagging and cleaning. 
+To account for the above issues, I loaded the images and metadata files into Airtable, with image url as the unique key between metadata and images.
 
 ```{r, fig.cap="Airtable data tagging interface. File Path blocked since it includes the Gmail user name of the submitter"}
 knitr::include_graphics("image/visual7.png")

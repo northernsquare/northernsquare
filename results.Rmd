@@ -107,11 +107,14 @@ ggplot(df_language, aes(x = fct_reorder(name, value, .desc = TRUE), y = value)) 
   ylab('count of posters') 
 ```
 
-Mapping the number of posters from early October to mid-November, we can see that:
+Mapping the number of posters from early October to mid-November, we can see that the movement mobilizes within one or two days after major news events. 
 
 - After the 10/13 protest on Sitong Bridge, there is an almost immediate response, and daily poster counts reached its first peak within two days of the protest.
 - The second peak is reached after the result of China's Twentieth National Party Congress is revealed. The percentage of posters directly calling on Xi (line in blue) jumped from less than half to 70% of all submissions (line in red).
 - The third peak happened after two large scale protests broke out in London and in New York.
+
+Note that the third peak might also be a reflection of collection bias - @northern_square shared the Google form survey link on their instagram page on November 3rd, causing a larger inflex of submissions 
+
 
 ```{r}
 df_time <- data  %>%

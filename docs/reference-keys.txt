@@ -1,6 +1,5 @@
 fig:unnamed-chunk-9
 fig:unnamed-chunk-10
-fig:unnamed-chunk-23
 introduction
 proposal
 data-collection
@@ -16,7 +15,7 @@ goal
 data-collection-1
 instagram-pages
 community-maintained-website
-goolge-form
+survey
 data-cleaning
 new-columns-created
 columns-updated

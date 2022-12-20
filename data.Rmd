@@ -102,7 +102,7 @@ This set up allows me go through every submission to add features and standardiz
 
 ## Transformation and Result
 
-In the last step, the cleaned files are pulled through Airtable API back into Python for final cleaning. The cleaning script `script/EDA_data_cleaning` achieves the following functionalities -
+In the last step, the cleaned files are pulled through Airtable API back into Python for final cleaning. The cleaning script `script/EDA_data_cleaning` achieves the following goals -
 
 - The cleaned location field are geocoded using `Geopy`, and are parsed into `Latitude`, `Longtitude` and `Country`;
 - The tagged features (messages, languages, formats) were stored in Airtable as lists, which are parsed into seperate columns of boolean values;

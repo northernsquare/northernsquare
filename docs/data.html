@@ -90,7 +90,7 @@
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="data.html"><a href="data.html#instagram-pages"><i class="fa fa-check"></i><b>3.2.1</b> Instagram pages</a></li>
 <li class="chapter" data-level="3.2.2" data-path="data.html"><a href="data.html#community-maintained-website"><i class="fa fa-check"></i><b>3.2.2</b> Community Maintained Website</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data.html"><a href="data.html#goolge-form"><i class="fa fa-check"></i><b>3.2.3</b> Goolge Form</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data.html"><a href="data.html#survey"><i class="fa fa-check"></i><b>3.2.3</b> Survey</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#data-cleaning"><i class="fa fa-check"></i><b>3.3</b> Data Cleaning</a>
 <ul>
@@ -133,7 +133,7 @@
 <h1><span class="header-section-number">Chapter 3</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="goal" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Goal<a href="data.html#goal" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are a lot of efforts to collect and share information about the movement, but almost all of them are trapped in social media applications like Twitter feeds or Instagram stories. Social media are easy to share and to gauge momentum during a political movement, but are not in a usable format for visualization and research.</p>
+<p>Many efforts popped up to collect and share information about the movement – including <code>myduty.net</code> and many instagram and Twitter accounts. But most are designed for easy to share and to gauge momentum during a political movement, but are not in a usable format for visualization and research.</p>
 <p>I hope to create a data collection and data cleaning workflow that achieves the following goals -</p>
 <ol style="list-style-type: decimal">
 <li>Create a queryable version of the poster image dataset that can be easily manipulated in a dataframe;</li>
@@ -141,7 +141,7 @@
 <ul>
 <li>A unique ID should be created to link the image file to other features;</li>
 <li>Manually entered fields (e.g. locations) should be standardized;</li>
-<li>Features created (e.g. what the poster is about) should be easily queryable.</li>
+<li>Features created (e.g. what the poster is about) should be easily queryable, in boolean or categorical fields.</li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
 <li><p>Create a reproducible workflow that allows me to continuously scrape, clean and maintain this dataset.</p></li>
@@ -153,19 +153,20 @@
 <h2><span class="header-section-number">3.2</span> Data Collection<a href="data.html#data-collection-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="instagram-pages" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Instagram pages<a href="data.html#instagram-pages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The phenomenon of overseas Chinese protestors using Instagram to distribute information and organize protests is well documented in mainstream media (<a href="Instagram%20accounts%20that%20have%20been%20considered%20central%20information%20hubs%20for%20the%20protest">Wired</a> and <a href="https://www.nytimes.com/2022/10/24/business/xi-jinping-protests.html">NYTimes</a>). Most notably, <a href="https://www.instagram.com/northern_square/"><span class="citation">@northern_square</span></a> and <a href="https://www.instagram.com/citizensdailycn/?hl=en"><span class="citation">@citizendailycn</span></a> can be pinpointed as the central hub of information. In an interview with Wired, Bei, a New York based artist who manages <a href="https://www.instagram.com/northern_square/"><span class="citation">@northern_square</span></a> described that his followers would put up the same slogan in their cities in solidarity with the Sitong Bridge protester, and then submitting the pictures to Bei. During the height of the movement, he would receive hundreds of submissions a day.</p>
-<p>To collect information shared by those two accounts, I first convert their Instagram pages into <code>JSON</code> format by adding the query string <code>?__a=1&amp;__d=dis</code> to their Instagram profile’s <code>HTML</code> address. Then the <code>JSON</code> can be downloaded to a local file, which I parsed using <code>scripts/instagram_scraper.py</code>. The output of the scraper is a <code>.csv</code> file containing metadata information of the images scraped, as well as the image files, connected by a unique <code>filename</code> field.</p>
+<p>The phenomenon of overseas Chinese protestors using Instagram to distribute information and organize protests is well documented in mainstream media (<a href="Instagram%20accounts%20that%20have%20been%20considered%20central%20information%20hubs%20for%20the%20protest">Wired</a> and <a href="https://www.nytimes.com/2022/10/24/business/xi-jinping-protests.html">NYTimes</a>). Most notably, <a href="https://www.instagram.com/northern_square/"><span class="citation">@northern_square</span></a> and <a href="https://www.instagram.com/citizensdailycn/?hl=en"><span class="citation">@citizendailycn</span></a> can be pinpointed as the central hub of information. In an interview with Wired, Bei, a New York based artist who manages <a href="https://www.instagram.com/northern_square/"><span class="citation">@northern_square</span></a> described that his followers would print out the poster templates that are shared on social media, put up the same slogan in their cities in solidarity with the Sitong Bridge protester, and then submitting the pictures to Bei, who will then share the picture on his Instagram story. During the height of the movement, he would receive hundreds of submissions a day, and his Instagram story would look like an endless stream of posters.</p>
+<p>To collect information shared by those two accounts, I first convert their Instagram pages into <code>JSON</code> format by adding the query string <code>?__a=1&amp;__d=dis</code> to their Instagram profile’s <code>HTML</code> address. Then the <code>JSON</code> can be downloaded to a local file, which I parsed using <code>scripts/instagram_scraper.py</code> into tabular format. The output of the scraper is a <code>.csv</code> file containing metadata information of the images scraped, as well as the image files, connected by a unique <code>filename</code> field.</p>
 <p>The results scraped from the Instagram pages only includes the image themselves and the post caption, and does not include any information with regard to who submitted the image or where the picture was taken. However, due to the curated nature of the post, this dataset includes some of the most compelling graphics -</p>
 <p><img src="image/visual5.png" width="1072" /></p>
 </div>
 <div id="community-maintained-website" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Community Maintained Website<a href="data.html#community-maintained-website" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><a href="myduty.net">myduty.net</a> is a spin off of <a href="https://www.instagram.com/citizensdailycn/?hl=en"><span class="citation">@citizendailycn</span></a>, built and maintained by community members, which collects and displays poster sightings from anonymous submissions. I built a simple scraper <code>scripts/website_scraper.py</code> using python’s <code>BeautifulSoup</code> package. The output of the scraper is a <code>.csv</code> file containing metadata information of the images scraped, as well as the image files, connected by a unique <code>filename</code> field.</p>
+<p><a href="myduty.net">myduty.net</a> is a spin off of <a href="https://www.instagram.com/citizensdailycn/?hl=en"><span class="citation">@citizendailycn</span></a>, built and maintained by community members, which collects and displays poster sightings from anonymous submissions. I built a simple scraper <code>scripts/website_scraper.py</code> using python’s <code>BeautifulSoup</code> package. The output of the scraper is a <code>.csv</code> file containing metadata information of the images scraped as a tabular format, as well as the image files, connected by a unique <code>filename</code> field.</p>
 <p>The results scrapped from the website does not include information about the submitter, but does include the location of the poster.</p>
 </div>
-<div id="goolge-form" class="section level3 hasAnchor" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> Goolge Form<a href="data.html#goolge-form" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A Google form is distributed to followers of <a href="https://www.instagram.com/northern_square/"><span class="citation">@northern_square</span></a> to submit sightings of poster or their own posters, which collects both pictures of the poster and a brief survey on submitter demographics. The form is also distributed in protesters’ Telegram groups, which is then passed through <code>scripts/form_data_cleaner.py</code> for basic data cleaning.</p>
+<div id="survey" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Survey<a href="data.html#survey" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A <a href="https://forms.gle/qTX1Gcv4DTtnapjH8">survey</a> is distributed to followers of <a href="https://www.instagram.com/northern_square/"><span class="citation">@northern_square</span></a> to submit sightings of poster or their own posters. The survey collects both pictures of the poster and a brief survey on submitter demographics. The form is also distributed in protesters’ Telegram groups.</p>
+<p>The result of the survey is then passed through <code>scripts/form_data_cleaner.py</code> to wrangle into tabular format.</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
 <img src="image/visual4.png" alt="@northern_square calling for followers to submit their posters through Google form" width="790" />
 <p class="caption">
@@ -178,15 +179,15 @@ Figure 3.1: <span class="citation">@northern_square</span> calling for followers
 <h2><span class="header-section-number">3.3</span> Data Cleaning<a href="data.html#data-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>By the end of November, I have collected 734 image files from the Google form, 360 image files scraped from <code>myduty.net</code>, and 151 scraped from both Instagram accounts. There are a lot of data quality issues associated with the data set:</p>
 <ul>
-<li>Location data are entered by the submitter, thus requires manual cleaning before we can use <code>Geopy</code> to standardize;</li>
-<li>Google automatically pulls the username of the form submitter to name the file they uploaded;</li>
-<li>Duplicate submissions exist;</li>
+<li>Location data are entered by the submitter, thus requires manual cleaning before we can use geocoder to standardize;</li>
+<li>Google automatically pulls the username of the form submitter to name the file they uploaded, causing a privacy risk;</li>
+<li>Duplicate submissions exist between the three channels;</li>
 <li>Some submissions or scrapped content are not pictures of posters (e.g. other Instagram posts, spams, etc);</li>
 <li>Image data requires manual tagging to extract queryable information;</li>
 <li>Image data contains EXIF data, which includes camera information and occasionally detailed GPS location of where the picture was taken;</li>
 <li>Some submissions include personally identifiable information.</li>
 </ul>
-<p>To account for the above issues, I loaded the images and metadata files into Airtable to leverage its interactive format for data tagging and cleaning.</p>
+<p>To account for the above issues, I loaded the images and metadata files into Airtable, with image url as the unique key between metadata and images.</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
 <img src="image/visual7.png" alt="Airtable data tagging interface. File Path blocked since it includes the Gmail user name of the submitter" width="748" />
 <p class="caption">
@@ -250,7 +251,7 @@ Figure 3.2: Airtable data tagging interface. File Path blocked since it includes
 </div>
 <div id="transformation-and-result" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Transformation and Result<a href="data.html#transformation-and-result" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the last step, the cleaned files are pulled through Airtable API back into Python for final cleaning. The cleaning script <code>script/EDA_data_cleaning</code> achieves the following functionalities -</p>
+<p>In the last step, the cleaned files are pulled through Airtable API back into Python for final cleaning. The cleaning script <code>script/EDA_data_cleaning</code> achieves the following goals -</p>
 <ul>
 <li>The cleaned location field are geocoded using <code>Geopy</code>, and are parsed into <code>Latitude</code>, <code>Longtitude</code> and <code>Country</code>;</li>
 <li>The tagged features (messages, languages, formats) were stored in Airtable as lists, which are parsed into seperate columns of boolean values;</li>

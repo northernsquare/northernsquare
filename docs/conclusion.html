@@ -90,7 +90,7 @@
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="data.html"><a href="data.html#instagram-pages"><i class="fa fa-check"></i><b>3.2.1</b> Instagram pages</a></li>
 <li class="chapter" data-level="3.2.2" data-path="data.html"><a href="data.html#community-maintained-website"><i class="fa fa-check"></i><b>3.2.2</b> Community Maintained Website</a></li>
-<li class="chapter" data-level="3.2.3" data-path="data.html"><a href="data.html#goolge-form"><i class="fa fa-check"></i><b>3.2.3</b> Goolge Form</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data.html"><a href="data.html#survey"><i class="fa fa-check"></i><b>3.2.3</b> Survey</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#data-cleaning"><i class="fa fa-check"></i><b>3.3</b> Data Cleaning</a>
 <ul>
@@ -131,39 +131,34 @@
             <section class="normal" id="section-">
 <div id="conclusion" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Conclusion<a href="conclusion.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Although the 692 posters we analytized barely captured the scale of the movement, we can observe the following traits:</p>
+<p>Although the 692 posters we analyzed barely captured the scale of the movement, we can observe the following traits:</p>
 <ul>
 <li>Participants are spread across the world;</li>
-<li>Most submitters identify as women;</li>
+<li>Most submitter identify as women;</li>
 <li>Most posters appeared on University campuses;</li>
 <li>The movement mobilizes quickly and is very reactive to the news cycle;</li>
 <li>A significant portion of the participants directly calls on Xi Jinping.</li>
 </ul>
 <div id="why-this-project" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Why this project?<a href="conclusion.html#why-this-project" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>One aspect of living in a totalitarian state is that your memory gets re-written. The Tiananmen massacre never happened; China never denied the existence of COVID early 2020 and never prosecuted doctors; protesters and dissents get forgotten as they “disappear”. What broke my heart when I saw the lone protester on Beijing’s Sitong bridge was that he was alone. What happened after completed upended what I expect of my generation, breaking out of fear and political apathy to take over the torch and making an effort to make sure that the Sitong bridge message is heard.</p>
-<p>Curating this dataset documenting this movement is my contribution to the movement. The Internet is supposed to remember, but the Internet under censorship is forced to forget over and over again. Posting on social media is a job not finished; in order to write this movement into history, we need to document it in a way that could be useful to reporters and researchers. To quote the late great Aaron Swartz (also fitting as we are using markdown, which he created in 2004):</p>
+<p>One aspect of living in a totalitarian state is that one’s memory gets re-written by the state. The Tiananmen massacre never happened; China never denied the existence of COVID early 2020 and never prosecuted doctors; protesters and dissents get forgotten as they “disappear”. What broke my heart when I saw the lone protester on Beijing’s Sitong bridge was that he was alone, and I fear for him the same fate as many who came before him: the protestor get taken in to custody, his pictures taken off from the internet, his action forgotten. Unable to stop the first two from happening, many pledge to take over the torch to make sure that the Sitong bridge message is heard around the world, and will not be easily forgotten.</p>
+<p>Curating this dataset is my contribution to the movement. The Internet is humanity’s collective memory, but the Internet under censorship is forced to forget over and over again. Posting on social media is a job not finished; in order to write this movement into history, we need to document it in a way that could be useful to reporters and researchers. As a data scientist, I am inspired by a quote from the late great Aaron Swartz (also fitting as we are using Markdown, which he created in 2004):</p>
 <blockquote>
 <p>Transparency can be a powerful thing, but not in isolation. So, let’s stop passing the buck by saying our job is just to get the data out there and it’s other people’s job to figure out how to use it. Let’s decide that our job is to fight for good in the world. I’d love to see all these amazing resources go to work on that.</p>
 </blockquote>
-<p>As the “other people” whose job is to “figure out how to use it”, I found the most challenging aspect of this research project is to set up a smooth data collection -&gt; tagging -&gt; output -&gt; analysis pipeline that allows for automatic syncs and routine tagging, which I was able to eventually achieve by the pipeline architecture in section 3.3. The second hardest part is to go through the tagging process of hundreds of images, most of them repeating the same mantra; at times it feels almost like a prayer.</p>
+<p>As the “other people” whose job is to “figure out how to use it”, I found the most challenging aspect of this research project is to set up a smooth data collection -&gt; tagging -&gt; output -&gt; analysis pipeline that allows for automatic syncs and routine tagging, which I was able to eventually achieve by the pipeline architecture in section 3.3.</p>
 </div>
 <div id="what-comes-next" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> What comes next?<a href="conclusion.html#what-comes-next" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>I decided to put a hard stop on the data cleaning process in Mid-November, as submission gradually dies down. November 25, an apartment fire in Urumqi sparked national outrage, and Chinese people around the world took the streets in a scale unseen since 1989. Due to the time limit of this project, I was unable to track this most recent uptick where the words on the poster peeled off the wall and are chanted in massive rallies. I have started the work of scraping protest data both in and out of China, and would love to continue to track the turn of events.</p>
-<p>If anything, this project shows the value of continuing to track this dataset. I hope to eventually create an interactive map in D3 that allows the following functions:</p>
+<p>I decided to put a hard stop on the data cleaning process in Mid-November, as submission gradually dies down. November 25, an apartment fire in Urumqi sparked national outrage, and Chinese people around the world took the streets in a scale unseen since 1989. Due to the time limit of this project, I was unable to track this most recent uptick where the words on the poster peeled off the wall and are chanted in massive rallies. I have started the work of scraping protest data both in and out of China, and would love to continue to track the second episode of the movement.</p>
+<p>If anything, this EDA project shows the value of continuing to track this dataset. The end goal would be to eventually create an interactive map in D3 that allows the following functions:</p>
 <ul>
 <li>Shows the geographic spread of the posters;</li>
 <li>Shows how they pop up over time</li>
 <li>Being able to filter the map by messages, languages and other features;</li>
 <li>Double click on the posters to read the message.</li>
 </ul>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
-<img src="image/visual8.jpg" alt="Airtable data tagging interface. File Path blocked since it includes the Gmail user name of the submitter" width="1512" />
-<p class="caption">
-Figure 6.1: Airtable data tagging interface. File Path blocked since it includes the Gmail user name of the submitter
-</p>
-</div>
+<p><img src="image/visual8.jpg" width="1512" /></p>
 
 </div>
 </div>

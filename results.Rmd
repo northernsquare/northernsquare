@@ -31,6 +31,7 @@ ggplot(df_gender, aes(x = gender, y = Freq, fill = gender)) +
   ylab('count of posters')
 
 ```
+
 The vast majority of the posters we collected directly reference the Sitong Bridge message (522 out of 692). More than half of the posters directly calls on Xi Jinping and end of his regime.
 
 ```{r}
@@ -52,7 +53,9 @@ ggplot(df_message, aes(x = fct_reorder(name, value, .desc = TRUE), y = value)) +
   ylab('count of posters')
 
 ```
-Most participants shared a picture of a poster they put up, but some expressed their creativity via graffiti, chalk art, or wrote hand-written messages.
+
+
+Most participants shared a picture of a poster, but some expressed their creativity via graffiti, chalk art, or wrote hand-written messages.
 
 ```{r}
 df_form <- data %>%
@@ -71,6 +74,7 @@ ggplot(df_form, aes(x = fct_reorder(name, value, .desc = TRUE), y = value)) +
   ylab('count of posters')
 
 ```
+
 Even the dataset is only less than 700 entries, we can already observe the significant geographic spread of the movement. The largest number of posters came from the United States, followed up Canada, UK and Japan. This distribution largely coincides with the size of the Chinese diaspora presence in the country.
 
 ```{r}
@@ -87,6 +91,8 @@ ggplot(df_country, mapping = aes(x = Freq, y = fct_reorder(country, Freq, .desc 
   theme_linedraw()
 
 ```
+
+
 The geographic spread is corroborated by the diversity of languages that appear on the posters. Although almost all posters appear in non-Chinese speaking nations, Chinese is used in 2/3 of the posters, suggesting that the message is address both to a foreign audience as well as towards others in the diaspora.
 
 ```{r}
@@ -106,6 +112,7 @@ ggplot(df_language, aes(x = fct_reorder(name, value, .desc = TRUE), y = value)) 
   xlab('language used') + 
   ylab('count of posters') 
 ```
+
 
 Mapping the number of posters from early October to mid-November, we can see that the movement mobilizes within one or two days after major news events. 
 
@@ -143,7 +150,7 @@ ggplot(df_time, aes(date, freq, group = type, color = type)) +
 
 ```
 
-Mapping the number of posters by day of the week, we observe that most events happen on Thursday and Friday, which deviates from the conventional wisdom that protests happen more over the weekend. The increase on Thursday and Friday can partially explained by the increase of posters posted on University campus, pointing to the possibility that most participants of the poster movements are students, who tend to push their "extracurriculars" to Thursdays and Fridays.
+Mapping the number of posters by day of the week, we observe that most entries are timestamped to Thursday and Friday, which deviates from the conventional wisdom that protest see better attendances over the weekend. The increase on Thursday and Friday can partially be explained by the increase of posters posted on University campus (blue), pointing to the possibility that most participants of the poster movements are students, who tend to push their "extracurriculars" to Thursdays and Fridays.
 
 ```{r}
 df_time <- data  %>%
